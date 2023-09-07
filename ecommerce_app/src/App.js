@@ -1,21 +1,38 @@
 import './App.css';
+import { useState } from 'react';
 import Navbar from './components/Navbar';
 import Store from './components/Store';
 
-function ListItem(props){
-  return(<li>Todo: {props.text}</li>)
 
-}
 function App() {
+const [storeItem, setStoreItem] = useState([ 
+ 
+    {
+      title: "Hat",
+      price: 5
+    },
+    {
+      title: "Shoe",
+      price: 20
+    },
+    {
+      title: "Shirt",
+      price: 15
+    },
+  ]
+);
+  
 
-  const StoreItems = ["Computer", "Books", "Cookie"]
-
-  const todo = ["play game", "beat game", "beat it agin"]
+ 
   return (
- <>
- <div></div>
-<Store items = {StoreItems}></Store>
- </>
+ <div>
+<Store items = {storeItem}
+ onItemAdd = {(itemData) => {
+  setStoreItem([...storeItem, itemData])
+
+}}
+/>
+</div>
   );
 }
 
