@@ -10,10 +10,13 @@ const [storeItem, setStoreItem] = useState([
  
   ]
 );
+
+const [loading, setloading] = useState(true);
   
 
 useEffect(() =>{
   axios.get("https://fakestoreapi.com/products").then(({data}) =>{
+  setloading(false);
   setStoreItem(data)
 })
 }, [])
@@ -22,6 +25,7 @@ useEffect(() =>{
   return (
  <div>
 <Store items = {storeItem}
+loading = {loading}
  onItemAdd = {(itemData) => {
   setStoreItem([...storeItem, itemData]) //sets storeItem with the old storeitem plus the new item 
 
