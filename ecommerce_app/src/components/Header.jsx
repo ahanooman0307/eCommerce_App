@@ -4,7 +4,7 @@ function Header (props) {
     return (
         
     <Box p = {4} shadow = "md">
-        <div>Hello </div>
+        <div></div>
         <Heading>{props.title}</Heading>
     </Box>
     )
