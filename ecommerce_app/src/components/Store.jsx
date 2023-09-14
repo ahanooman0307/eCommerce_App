@@ -1,6 +1,7 @@
 import {Box, Heading, Stack, Input, Image, Button, Text, Flex, Spacer, Tag, SimpleGrid, Center, GridItem, Spinner } from "@chakra-ui/react"
 import { useEffect, useRef, useState } from "react";
 import Header from "./Header";
+import { Link } from "react-router-dom";
 
 
 const StoreItem = ({title, price, image}) => {
@@ -38,7 +39,9 @@ function Store({items, loading}) {
             {filteredItems.map((item) => {
                 return( 
                 <GridItem>
-                    <StoreItem {...item} /> 
+                    <Link to={`/product/${item.id}`}>
+                    <StoreItem {...item} />
+                    </Link> 
                 
                 </GridItem> 
                 );
