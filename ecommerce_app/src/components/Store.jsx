@@ -2,7 +2,7 @@ import {Box, Heading, Stack, Input, Image, Button, Text, Flex, Spacer, Tag, Simp
 import { useEffect, useRef, useState } from "react";
 import Header from "./Header";
 import { Link } from "react-router-dom";
-
+import axios from "axios";
 
 const StoreItem = ({title, price, image}) => {
 return(
@@ -19,19 +19,29 @@ return(
     </Box>
 )
 }
-function Store({items, loading}) {
-   const [filteredItems, setFilteredItems] = useState(items)   
+function Store({}) {
+    const [storeItem, setStoreItem] = useState([]);
 
-   useEffect(() =>{
-    setFilteredItems(items);
-   }, [items])
+   const [filteredItems, setFilteredItems] = useState([]);
+   const [loading, setLoading] = useState(true);
+
+   useEffect(() => {
+    axios.get("https://fakestoreapi.com/products").then(({ data }) => {
+      setLoading(false);
+      setStoreItem(data);
+      setFilteredItems(data)
+    });
+  }, []);
+   
+
+
     return (
         <Box p = {4}>
                <Header title = "Fake Store"></Header>
             {loading ? <Center mt={6}><Spinner></Spinner></Center> : 
             <Box padding={2}>
             <Input onChange={e =>{
-                let f = items.filter(item => item.title.toLowerCase().includes(e.target.value.toLowerCase()));
+                let f = storeItem.filter(item => item.title.toLowerCase().includes(e.target.value.toLowerCase()));
                 setFilteredItems(f);
             }} placeholder="Search" mt={2}></Input>
            
