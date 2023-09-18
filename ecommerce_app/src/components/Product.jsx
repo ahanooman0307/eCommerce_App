@@ -35,14 +35,14 @@ function Product (props) {
     const addToCart = () => {
         setCartItems((prevCartItems) => {
         const updatedCart = [...prevCartItems, storeItem.id];
-    localStorage.setItem('cart', JSON.stringify(updatedCart));
+    sessionStorage.setItem('cart', JSON.stringify(updatedCart)); //localStorage saves all the time while sessionStorage saves until browser closes
     return updatedCart;
       });
       console.log(cartItems)
     }
 
     useEffect(() => {
-        const storedCart = localStorage.getItem('cart');
+        const storedCart = sessionStorage.getItem('cart');
         if (storedCart) {
           setCartItems(JSON.parse(storedCart));
         }
